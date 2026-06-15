@@ -61,11 +61,7 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton asChild isActive={active} tooltip={item.label} className="h-10 gap-3 px-3">
-                      {item.href === "/" ? (
-                        <Link to="/">{content}</Link>
-                      ) : (
-                        <a href={item.href}>{content}</a>
-                      )}
+                      <Link to={item.href}>{content}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
