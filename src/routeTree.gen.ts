@@ -10,11 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PolicyReferenceRouteImport } from './routes/policy-reference'
+import { Route as FirewallLogsRouteImport } from './routes/firewall-logs'
+import { Route as ClaimsChatRouteImport } from './routes/claims-chat'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PolicyReferenceRoute = PolicyReferenceRouteImport.update({
+  id: '/policy-reference',
+  path: '/policy-reference',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FirewallLogsRoute = FirewallLogsRouteImport.update({
+  id: '/firewall-logs',
+  path: '/firewall-logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClaimsChatRoute = ClaimsChatRouteImport.update({
+  id: '/claims-chat',
+  path: '/claims-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +43,55 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/claims-chat': typeof ClaimsChatRoute
+  '/firewall-logs': typeof FirewallLogsRoute
+  '/policy-reference': typeof PolicyReferenceRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/claims-chat': typeof ClaimsChatRoute
+  '/firewall-logs': typeof FirewallLogsRoute
+  '/policy-reference': typeof PolicyReferenceRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/claims-chat': typeof ClaimsChatRoute
+  '/firewall-logs': typeof FirewallLogsRoute
+  '/policy-reference': typeof PolicyReferenceRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/claims-chat'
+    | '/firewall-logs'
+    | '/policy-reference'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/claims-chat'
+    | '/firewall-logs'
+    | '/policy-reference'
+    | '/sitemap.xml'
+  id:
+    | '__root__'
+    | '/'
+    | '/claims-chat'
+    | '/firewall-logs'
+    | '/policy-reference'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClaimsChatRoute: typeof ClaimsChatRoute
+  FirewallLogsRoute: typeof FirewallLogsRoute
+  PolicyReferenceRoute: typeof PolicyReferenceRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -56,6 +102,27 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policy-reference': {
+      id: '/policy-reference'
+      path: '/policy-reference'
+      fullPath: '/policy-reference'
+      preLoaderRoute: typeof PolicyReferenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/firewall-logs': {
+      id: '/firewall-logs'
+      path: '/firewall-logs'
+      fullPath: '/firewall-logs'
+      preLoaderRoute: typeof FirewallLogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/claims-chat': {
+      id: '/claims-chat'
+      path: '/claims-chat'
+      fullPath: '/claims-chat'
+      preLoaderRoute: typeof ClaimsChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +137,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClaimsChatRoute: ClaimsChatRoute,
+  FirewallLogsRoute: FirewallLogsRoute,
+  PolicyReferenceRoute: PolicyReferenceRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
